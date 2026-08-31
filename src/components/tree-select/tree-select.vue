@@ -17,49 +17,52 @@
 </template>
 
 <script>
-import Emitter from 'iview/src/mixins/emitter'
+import Emitter from 'view-design/src/mixins/emitter'
 import TreeSelectTreeItem from './tree-select-tree.vue'
 export default {
   name: 'TreeSelect',
   mixins: [Emitter],
   components: {
-    TreeSelectTreeItem
+    TreeSelectTreeItem,
   },
   props: {
     value: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     data: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
-    loadData: Function
+    loadData: Function,
   },
-  data () {
+  data() {
     return {
       isChangedByTree: true,
-      isInit: true
+      isInit: true,
     }
   },
-  provide () {
+  provide() {
     return {
-      parent: this
+      parent: this,
     }
   },
   methods: {
-    handleChange (selected) {
+    handleChange(selected) {
       if (!this.isChangedByTree) this.$emit('input', selected)
       this.isChangedByTree = false
     },
-    handleTreeCheck (selectedArray) {
+    handleTreeCheck(selectedArray) {
       this.isChangedByTree = true
-      this.$emit('input', selectedArray.map(item => item.id))
+      this.$emit(
+        'input',
+        selectedArray.map((item) => item.id)
+      )
     },
-    handleClear () {
+    handleClear() {
       this.$refs.select.reset()
-    }
-  }
+    },
+  },
 }
 </script>
 

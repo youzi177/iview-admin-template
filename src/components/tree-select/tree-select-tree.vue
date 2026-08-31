@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Emitter from 'iview/src/mixins/emitter.js'
+import Emitter from 'view-design/src/mixins/emitter.js'
 
 const arrayEqual = (arr1, arr2) => {
   // 判断数组的长度
@@ -33,76 +33,85 @@ export default {
   props: {
     data: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     selectedArray: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
-    loadData: Function
+    loadData: Function,
   },
-  data () {
+  data() {
     return {
       flatDic: {},
-      checkedArray: []
+      checkedArray: [],
     }
   },
   inject: ['parent'],
   computed: {
-    expandAll () {
+    expandAll() {
       return this.parent.$attrs['expand-all']
-    }
+    },
   },
   watch: {
-    data (newData, oldVal) {
+    data(newData, oldVal) {
       this.updateFlagDic(newData)
-      let selectArray = []
-      this.selectedArray.forEach(id => {
+      const selectArray = []
+
+      this.selectedArray.forEach((id) => {
         if (id in this.flatDic) selectArray.push(id)
       })
-      this.$emit('on-check', selectArray.map(id => this.flatDic[id]))
+      this.$emit(
+        'on-check',
+        selectArray.map((id) => this.flatDic[id])
+      )
       if (this.expandAll) this.checkData(newData, false, true)
     },
-    selectedArray (newVal, oldVal) {
+    selectedArray(newVal, oldVal) {
       if (arrayEqual(newVal, oldVal)) return
-      const filtedNewVal = newVal.filter(id => id in this.flatDic)
-      this.$emit('on-check', filtedNewVal.map(id => this.flatDic[id]))
+      const filtedNewVal = newVal.filter((id) => id in this.flatDic)
+      this.$emit(
+        'on-check',
+        filtedNewVal.map((id) => this.flatDic[id])
+      )
       this.$emit('on-clear')
       this.$nextTick(() => {
         this.checkData(this.data, true)
       })
-    }
+    },
   },
   methods: {
-    checkEmit (value, label) {
+    checkEmit(value, label) {
       this.dispatch('iSelect', 'on-select-selected', {
         value,
-        label
+        label,
       })
       this.$emit('on-select-selected', {
         value,
-        label
+        label,
       })
     },
-    updateFlagDic (newData) {
-      let newFlagDic = {}
-      this.setFlagDic(newData, item => {
+    updateFlagDic(newData) {
+      const newFlagDic = {}
+      this.setFlagDic(newData, (item) => {
         newFlagDic[item.id] = item
       })
       this.flatDic = newFlagDic
     },
-    setFlagDic (data, callback) {
-      data.forEach(item => {
-        if (item.children && item.children.length) { this.setFlagDic(item.children, callback) }
+    setFlagDic(data, callback) {
+      data.forEach((item) => {
+        if (item.children && item.children.length) {
+          this.setFlagDic(item.children, callback)
+        }
         callback(item)
       })
     },
-    handleCheckSelect (selectArray, selectItem) {
+    handleCheckSelect(selectArray, selectItem) {
       this.$emit('on-check', selectArray)
       this.parent.$emit('on-change', selectArray)
     },
-    checkData (data, emit, expandAll) {
-      data.forEach(item => {
+    checkData(data, emit, expandAll) {
+      data.forEach((item) => {
         if (this.selectedArray.includes(item.id)) {
           this.$set(item, 'checked', true)
           this.checkedArray.push(item)
@@ -114,21 +123,21 @@ export default {
         }
       })
     },
-    loadDataCallback (item, callback) {
-      this.loadData(item, data => {
+    loadDataCallback(item, callback) {
+      this.loadData(item, (data) => {
         return (() => {
           callback(data)
           this.updateFlagDic(this.data)
         })(data)
       })
-    }
+    },
   },
-  mounted () {
+  mounted() {
     this.checkData(this.data, false, true)
     this.$nextTick(() => {
       this.$emit('on-check', this.checkedArray)
     })
-  }
+  },
 }
 </script>
 

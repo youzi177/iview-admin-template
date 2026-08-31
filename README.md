@@ -1,90 +1,39 @@
-<p align="center">
-    <a href="https://www.iviewui.com">
-        <img width="200" src="https://file.iviewui.com/logo-new.svg">
-    </a>
-</p>
+## Iview-Admin-Template
 
-<h1>
-iView Admin
-    <h3>Vue.js 2.0 admin management system template based on iView.</h3>
-</h1>
+这是一个基于`Iview-Admin`的升级模板，对依赖进行**有限的升级**，包括升级为view-design，该项目在`node：12.14.0`完美运行（0错误0警告），建议在改版本下运行项目，
 
-[![](https://img.shields.io/github/release/iview/iview-admin.svg)](https://github.com/iview/iview-admin/releases)
-[![](https://img.shields.io/travis/iview/iview-admin.svg?style=flat-square)](https://travis-ci.org/iview/iview-admin)
-[![vue](https://img.shields.io/badge/vue-2.5.17-brightgreen.svg?style=flat-square)](https://github.com/vuejs/vue)
-[![iview ui](https://img.shields.io/badge/iview-3.2.2-brightgreen.svg?style=flat-square)](https://github.com/iview/iview)
-[![npm](https://img.shields.io/npm/l/express.svg)]()
+对控制台的一些警告错误也进行优化
 
-## Introduction
+## 版本要求
 
-iView Admin is a front-end management background integration solution. It based on [Vue.js](https://github.com/vuejs/vue) and use the UI Toolkit [iView](https://github.com/iview/iview).
+```
+nvm install 12.14.0
+nvm use 12.14.0
+```
 
-- [Document](https://lison16.github.io/iview-admin-doc/)
-- [Preview](https://admin.iviewui.com/)
-- [Base template recommends using](https://github.com/iview/iview-admin/tree/template)
+运行项目
 
-![image](https://file.iviewui.com/admin-dist/admin-preview.png)
-
-## Features
-
-- Login / Logout
-- Permission Authentication
-    - A list of filters
-    - Permission to switch
-- i18n
-- Components
-    - Rich Text Editor
-    - Markdown Editor
-    - City Cascader
-    - Photos preview and edit
-    - Draggable list
-    - File upload
-    - Digital gradient
-    - split-pane
-- Form
-    - The article published
-    - Workflow
-- Table
-    - Drag-and-drop sort
-    - Searchable form
-    - Table export data
-        - Export to Csv file
-        - Export to Xls file
-    - Table to picture
-- Error Page
-    - 403
-    - 404
-    - 500
-- Router
-    - Dynamic routing
-    - With reference page
-- Theme
-- Shrink the sidebar
-- Tag navigation
-- Breadcrumb navigation
-- Full screen / exit full screen
-- Lock screen
-- The message center
-- Personal center
-
-## Getting started
-```bush
-# clone the project
-git clone https://github.com/iview/iview-admin.git
-
-// install dependencies
-npm install
-
-// develop
+```
+git clone https://github.com/youzi177/iview-admin-template.git
+npm install 
 npm run dev
 ```
 
-## Build
-```bush
-npm run build
+## 主要修改
+
+**安装指定的webpack和Babel和marked**
+
+```
+npm install -D webpack@4.46.0 @babel/core@7.10.0 @babel/preset-env@7.10.0 marked@0.3.19
 ```
 
-## License
-[MIT](http://opensource.org/licenses/MIT)
+说明：
 
-Copyright (c) 2016-present, TalkingData
+- `simplemde@1.11.2` 的依赖声明是 marked: "*"，所以重新安装依赖时，`npm` 把当前最新的 marked 拉下来了；建议先卸载marked再安装，`npm uninstall marked`
+- 某个旧版 friendly-errors 插件尝试访问已经不存在的 `webpack` 内部模块,所以重新安装指定的`webpack` 版本
+
+**升级为`view-design4`，移除`iview`组件库**
+
+- View UI（iView）从 4.0.0 版本开始，需将 `npm` 包 `iview` 替换为 `view-design`。
+
+**增加了`.prettierrc`和配置vscode自动格式化**
