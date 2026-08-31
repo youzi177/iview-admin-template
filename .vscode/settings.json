@@ -1,0 +1,21 @@
+{
+  "i18n-ally.localesPaths": [
+    "src/locale",
+    "src/locale/lang",
+    "src/view/i18n",
+    "src/components/main/components/language"
+  ],
+  "files.eol": "\n",
+  "eslint.validate": ["javascript", "javascriptreact", "vue"],
+  "[javascript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    }
+  },
+
+  "[vue]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    }
+  }
+}
