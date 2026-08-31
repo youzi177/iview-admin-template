@@ -1,5 +1,10 @@
 <template>
-  <component :is="iconType" :type="iconName" :color="iconColor" :size="iconSize"/>
+  <component
+    :is="iconType"
+    :type="iconName"
+    :color="iconColor"
+    :size="iconSize"
+  />
 </template>
 
 <script>
@@ -10,33 +15,33 @@ export default {
   props: {
     type: {
       type: String,
-      required: true
+      required: true,
     },
     color: String,
-    size: Number
+    size: Number,
   },
   computed: {
-    iconType () {
+    iconType() {
       return this.type.indexOf('_') === 0 ? 'Icons' : 'Icon'
     },
-    iconName () {
-      return this.iconType === 'Icons' ? this.getCustomIconName(this.type) : this.type
+    iconName() {
+      return this.iconType === 'Icons'
+        ? this.getCustomIconName(this.type)
+        : this.type
     },
-    iconSize () {
+    iconSize() {
       return this.size || (this.iconType === 'Icons' ? 12 : undefined)
     },
-    iconColor () {
+    iconColor() {
       return this.color || ''
-    }
+    },
   },
   methods: {
-    getCustomIconName (iconName) {
+    getCustomIconName(iconName) {
       return iconName.slice(1)
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

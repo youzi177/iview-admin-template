@@ -18,6 +18,6 @@ export default new Vuex.Store({
   },
   modules: {
     user,
-    app
-  }
+    app,
+  },
 })

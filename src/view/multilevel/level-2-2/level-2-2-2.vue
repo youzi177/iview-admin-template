@@ -7,10 +7,10 @@
 <script>
 export default {
   name: 'level_2_2_2',
-  data () {
+  data() {
     return {
-      val: ''
+      val: '',
     }
-  }
+  },
 }
 </script>

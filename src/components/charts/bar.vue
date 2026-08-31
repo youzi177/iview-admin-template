@@ -12,47 +12,49 @@ export default {
   props: {
     value: Object,
     text: String,
-    subtext: String
+    subtext: String,
   },
-  data () {
+  data() {
     return {
-      dom: null
+      dom: null,
     }
   },
   methods: {
-    resize () {
+    resize() {
       this.dom.resize()
-    }
+    },
   },
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
-      let xAxisData = Object.keys(this.value)
-      let seriesData = Object.values(this.value)
-      let option = {
+      const xAxisData = Object.keys(this.value)
+      const seriesData = Object.values(this.value)
+      const option = {
         title: {
           text: this.text,
           subtext: this.subtext,
-          x: 'center'
+          x: 'center',
         },
         xAxis: {
           type: 'category',
-          data: xAxisData
+          data: xAxisData,
         },
         yAxis: {
-          type: 'value'
+          type: 'value',
         },
-        series: [{
-          data: seriesData,
-          type: 'bar'
-        }]
+        series: [
+          {
+            data: seriesData,
+            type: 'bar',
+          },
+        ],
       }
       this.dom = echarts.init(this.$refs.dom, 'tdTheme')
       this.dom.setOption(option)
       on(window, 'resize', this.resize)
     })
   },
-  beforeDestroy () {
+  beforeDestroy() {
     off(window, 'resize', this.resize)
-  }
+  },
 }
 </script>

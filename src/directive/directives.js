@@ -3,7 +3,7 @@ import clipboard from './module/clipboard'
 
 const directives = {
   draggable,
-  clipboard
+  clipboard,
 }
 
 export default directives

@@ -1,11 +1,11 @@
 <template>
   <div class="zoom-wrapper">
     <button class="zoom-button" @click="scale('down')">
-      <Icon type="md-remove" :size="14" color="#fff"/>
+      <Icon type="md-remove" :size="14" color="#fff" />
     </button>
     <span class="zoom-number">{{ value }}%</span>
     <button class="zoom-button" @click="scale('up')">
-      <Icon type="md-add" :size="14" color="#fff"/>
+      <Icon type="md-add" :size="14" color="#fff" />
     </button>
   </div>
 </template>
@@ -16,23 +16,23 @@ export default {
   props: {
     value: {
       type: Number,
-      default: 100
+      default: 100,
     },
     step: {
       type: Number,
-      default: 20
+      default: 20,
     },
     min: {
       type: Number,
-      default: 10
+      default: 10,
     },
     max: {
       type: Number,
-      default: 200
-    }
+      default: 200,
+    },
   },
   methods: {
-    scale (type) {
+    scale(type) {
       const zoom = this.value + (type === 'down' ? -this.step : this.step)
       if (
         (zoom < this.min && type === 'down') ||
@@ -41,14 +41,14 @@ export default {
         return
       }
       this.$emit('input', zoom)
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style lang="less">
 .trans(@duration) {
-  transition: ~"all @{duration} ease-in";
+  transition: ~'all @{duration} ease-in';
 }
 .zoom-wrapper {
   .zoom-button {

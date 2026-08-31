@@ -22,27 +22,27 @@ import { uploadImg } from '@/api/data'
 export default {
   name: 'cropper_page',
   components: {
-    Cropper
+    Cropper,
   },
-  data () {
+  data() {
     return {
-      exampleImageSrc: ''
+      exampleImageSrc: '',
     }
   },
   methods: {
-    handleCroped (blob) {
+    handleCroped(blob) {
       const formData = new FormData()
       formData.append('croppedImg', blob)
       uploadImg(formData).then(() => {
         this.$Message.success('Upload success~')
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style lang="less">
-.cropper-example{
+.cropper-example {
   height: 400px;
 }
 </style>

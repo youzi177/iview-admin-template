@@ -1,5 +1,5 @@
 <template>
-  <error-content code="401" desc="Oh~~您没有浏览这个页面的权限~" :src="src"/>
+  <error-content code="401" desc="Oh~~您没有浏览这个页面的权限~" :src="src" />
 </template>
 
 <script>
@@ -8,12 +8,12 @@ import errorContent from './error-content.vue'
 export default {
   name: 'error_401',
   components: {
-    errorContent
+    errorContent,
   },
-  data () {
+  data() {
     return {
-      src: error401
+      src: error401,
     }
-  }
+  },
 }
 </script>

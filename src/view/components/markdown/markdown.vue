@@ -1,6 +1,6 @@
 <template>
   <div>
-    <markdown-editor v-model="content"/>
+    <markdown-editor v-model="content" />
   </div>
 </template>
 
@@ -9,16 +9,14 @@ import MarkdownEditor from '_c/markdown'
 export default {
   name: 'markdown_page',
   components: {
-    MarkdownEditor
+    MarkdownEditor,
   },
-  data () {
+  data() {
     return {
-      content: ''
+      content: '',
     }
-  }
+  },
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

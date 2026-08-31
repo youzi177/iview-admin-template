@@ -1,5 +1,5 @@
 {
-  "name": "Fluff-admin",
+  "name": "iview-admin-template",
   "version": "1.0.0",
   "private": false,
   "author": "youzi177<youzi177@126.com>",
@@ -79,10 +79,10 @@
   },
   "lint-staged": {
     "*.js": [
-      "vue-cli-service lint"
+      "vue-cli-service lint --fix"
     ],
     "*.vue": [
-      "vue-cli-service lint"
+      "vue-cli-service lint --fix"
     ]
   }
 }

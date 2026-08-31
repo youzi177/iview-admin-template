@@ -12,35 +12,35 @@ export default {
   props: {
     value: Array,
     text: String,
-    subtext: String
+    subtext: String,
   },
-  data () {
+  data() {
     return {
-      dom: null
+      dom: null,
     }
   },
   methods: {
-    resize () {
+    resize() {
       this.dom.resize()
-    }
+    },
   },
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
-      let legend = this.value.map(_ => _.name)
-      let option = {
+      const legend = this.value.map((_) => _.name)
+      const option = {
         title: {
           text: this.text,
           subtext: this.subtext,
-          x: 'center'
+          x: 'center',
         },
         tooltip: {
           trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)'
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
         },
         legend: {
           orient: 'vertical',
           left: 'left',
-          data: legend
+          data: legend,
         },
         series: [
           {
@@ -52,19 +52,19 @@ export default {
               emphasis: {
                 shadowBlur: 10,
                 shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
-              }
-            }
-          }
-        ]
+                shadowColor: 'rgba(0, 0, 0, 0.5)',
+              },
+            },
+          },
+        ],
       }
       this.dom = echarts.init(this.$refs.dom, 'tdTheme')
       this.dom.setOption(option)
       on(window, 'resize', this.resize)
     })
   },
-  beforeDestroy () {
+  beforeDestroy() {
     off(window, 'resize', this.resize)
-  }
+  },
 }
 </script>

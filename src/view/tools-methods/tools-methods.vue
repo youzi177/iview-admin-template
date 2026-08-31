@@ -10,7 +10,7 @@
         </i-col>
       </Row>
     </Card>
-    <Card shadow style="margin-top: 10px;">
+    <Card shadow style="margin-top: 10px">
       <Row>
         <i-col span="4">
           <Button @click="createTagQuery">添加一个标签</Button>
@@ -20,7 +20,7 @@
         </i-col>
       </Row>
     </Card>
-    <Card shadow style="margin-top: 10px;">
+    <Card shadow style="margin-top: 10px">
       <Row>
         <i-col span="4">
           <Button @click="handleCloseTag">关闭工具方法页</Button>
@@ -38,44 +38,40 @@ import { mapMutations } from 'vuex'
 export default {
   name: 'tools_methods_page',
   methods: {
-    ...mapMutations([
-      'closeTag'
-    ]),
-    createTagParams () {
+    ...mapMutations(['closeTag']),
+    createTagParams() {
       const id = parseInt(Math.random() * 100000)
       const route = {
         name: 'params',
         params: {
-          id
+          id,
         },
         meta: {
-          title: `动态路由-${id}`
-        }
+          title: `动态路由-${id}`,
+        },
       }
       this.$router.push(route)
     },
-    createTagQuery () {
+    createTagQuery() {
       const id = parseInt(Math.random() * 100000)
       const route = {
         name: 'query',
         query: {
-          id
+          id,
         },
         meta: {
-          title: `参数-${id}`
-        }
+          title: `参数-${id}`,
+        },
       }
       this.$router.push(route)
     },
-    handleCloseTag () {
+    handleCloseTag() {
       this.closeTag({
-        name: 'tools_methods_page'
+        name: 'tools_methods_page',
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

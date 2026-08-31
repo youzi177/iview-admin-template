@@ -10,9 +10,8 @@
 import Mixin from './mixin'
 export default {
   name: 'DragDrawerTrigger',
-  mixins: [Mixin]
+  mixins: [Mixin],
 }
 </script>
 
-<style>
-</style>
+<style></style>

@@ -23,31 +23,31 @@ import { on, off } from '@/libs/tools'
 const menuList = [
   {
     key: 'edit',
-    label: '编辑部门'
+    label: '编辑部门',
   },
   {
     key: 'detail',
-    label: '查看部门'
+    label: '查看部门',
   },
   {
     key: 'new',
-    label: '新增子部门'
+    label: '新增子部门',
   },
   {
     key: 'delete',
-    label: '删除部门'
-  }
+    label: '删除部门',
+  },
 ]
 export default {
   name: 'OrgView',
   props: {
     zoomHandled: {
       type: Number,
-      default: 1
+      default: 1,
     },
-    data: Object
+    data: Object,
   },
-  data () {
+  data() {
     return {
       currentContextMenuId: '',
       orgTreeOffsetLeft: 0,
@@ -56,42 +56,40 @@ export default {
       initPageY: 0,
       oldMarginLeft: 0,
       oldMarginTop: 0,
-      canMove: false
+      canMove: false,
     }
   },
   computed: {
-    orgTreeStyle () {
+    orgTreeStyle() {
       return {
-        transform: `translate(-50%, -50%) scale(${this.zoomHandled}, ${
-          this.zoomHandled
-        })`,
+        transform: `translate(-50%, -50%) scale(${this.zoomHandled}, ${this.zoomHandled})`,
         marginLeft: `${this.orgTreeOffsetLeft}px`,
-        marginTop: `${this.orgTreeOffsetTop}px`
+        marginTop: `${this.orgTreeOffsetTop}px`,
       }
-    }
+    },
   },
   methods: {
-    handleNodeClick (e, data, expand) {
+    handleNodeClick(e, data, expand) {
       expand()
     },
-    closeMenu () {
+    closeMenu() {
       this.currentContextMenuId = ''
     },
-    getBgColor (data) {
+    getBgColor(data) {
       return this.currentContextMenuId === data.id
         ? data.isRoot
           ? '#0d7fe8'
           : '#5d6c7b'
         : ''
     },
-    nodeRender (h, data) {
+    nodeRender(h, data) {
       return (
         <div
           class={[
             'custom-org-node',
-            data.children && data.children.length ? 'has-children-label' : ''
+            data.children && data.children.length ? 'has-children-label' : '',
           ]}
-          on-mousedown={event => event.stopPropagation()}
+          on-mousedown={(event) => event.stopPropagation()}
           on-contextmenu={this.contextmenu.bind(this, data)}
         >
           {data.label}
@@ -102,13 +100,14 @@ export default {
             nativeOn-click={this.handleDropdownClick}
             on-on-click={this.handleContextMenuClick.bind(this, data)}
             style={{
-              transform: `scale(${1 / this.zoomHandled}, ${1 /
-                this.zoomHandled})`
+              transform: `scale(${1 / this.zoomHandled}, ${
+                1 / this.zoomHandled
+              })`,
             }}
             v-click-outside={this.closeMenu}
           >
             <dropdown-menu slot="list">
-              {menuList.map(item => {
+              {menuList.map((item) => {
                 return (
                   <dropdown-item name={item.key}>{item.label}</dropdown-item>
                 )
@@ -118,18 +117,18 @@ export default {
         </div>
       )
     },
-    contextmenu (data, $event) {
-      let event = $event || window.event
+    contextmenu(data, $event) {
+      const event = $event || window.event
       event.preventDefault
         ? event.preventDefault()
         : (event.returnValue = false)
       this.currentContextMenuId = data.id
     },
-    setDepartmentData (data) {
+    setDepartmentData(data) {
       data.isRoot = true
       this.departmentData = data
     },
-    mousedownView (event) {
+    mousedownView(event) {
       this.canMove = true
       this.initPageX = event.pageX
       this.initPageY = event.pageY
@@ -138,35 +137,34 @@ export default {
       on(document, 'mousemove', this.mousemoveView)
       on(document, 'mouseup', this.mouseupView)
     },
-    mousemoveView (event) {
+    mousemoveView(event) {
       if (!this.canMove) return
       const { pageX, pageY } = event
       this.orgTreeOffsetLeft = this.oldMarginLeft + pageX - this.initPageX
       this.orgTreeOffsetTop = this.oldMarginTop + pageY - this.initPageY
     },
-    mouseupView () {
+    mouseupView() {
       this.canMove = false
       off(document, 'mousemove', this.mousemoveView)
       off(document, 'mouseup', this.mouseupView)
     },
-    handleDropdownClick (event) {
+    handleDropdownClick(event) {
       event.stopPropagation()
     },
-    handleDocumentContextmenu () {
+    handleDocumentContextmenu() {
       this.canMove = false
     },
-    handleContextMenuClick (data, key) {
+    handleContextMenuClick(data, key) {
       this.$emit('on-menu-click', { data, key })
-    }
+    },
   },
-  mounted () {
+  mounted() {
     on(document, 'contextmenu', this.handleDocumentContextmenu)
   },
-  beforeDestroy () {
+  beforeDestroy() {
     off(document, 'contextmenu', this.handleDocumentContextmenu)
-  }
+  },
 }
 </script>
 
-<style>
-</style>
+<style></style>

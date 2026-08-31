@@ -2,15 +2,15 @@ import Clipboard from 'clipboard'
 export default {
   bind: (el, binding) => {
     const clipboard = new Clipboard(el, {
-      text: () => binding.value.value
+      text: () => binding.value.value,
     })
     el.__success_callback__ = binding.value.success
     el.__error_callback__ = binding.value.error
-    clipboard.on('success', e => {
+    clipboard.on('success', (e) => {
       const callback = el.__success_callback__
       callback && callback(e)
     })
-    clipboard.on('error', e => {
+    clipboard.on('error', (e) => {
       const callback = el.__error_callback__
       callback && callback(e)
     })
@@ -26,5 +26,5 @@ export default {
     delete el.__error_callback__
     el.__clipboard__.destroy()
     delete el.__clipboard__
-  }
+  },
 }

@@ -1,7 +1,9 @@
 <template>
   <div>
     <Button size="large" type="text" @click="backHome">返回首页</Button>
-    <Button size="large" type="text" @click="backPrev">返回上一页({{ second }}s)</Button>
+    <Button size="large" type="text" @click="backPrev"
+      >返回上一页({{ second }}s)</Button
+    >
   </div>
 </template>
 
@@ -9,30 +11,30 @@
 import './error.less'
 export default {
   name: 'backBtnGroup',
-  data () {
+  data() {
     return {
       second: 5,
-      timer: null
+      timer: null,
     }
   },
   methods: {
-    backHome () {
+    backHome() {
       this.$router.replace({
-        name: this.$config.homeName
+        name: this.$config.homeName,
       })
     },
-    backPrev () {
+    backPrev() {
       this.$router.go(-1)
-    }
+    },
   },
-  mounted () {
+  mounted() {
     this.timer = setInterval(() => {
       if (this.second === 0) this.backPrev()
       else this.second--
     }, 1000)
   },
-  beforeDestroy () {
+  beforeDestroy() {
     clearInterval(this.timer)
-  }
+  },
 }
 </script>
